@@ -7,9 +7,7 @@ class Post(models.Model):
     title = models.CharField(verbose_name="Título", max_length=200, null=False)
     content = models.TextField(verbose_name="Contenido")
     slug = models.SlugField(max_length=200, unique=True, null=False)
-    # image = models.ImageField(null=False, blank=False, upload_to="images/post")
-    order = models.IntegerField
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    order = models.IntegerField(null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
