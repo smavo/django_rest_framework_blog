@@ -1,6 +1,9 @@
 
 # Instalaciones
 
+## Crear entorno virtual para el proyecto
+```python -m venv venv```
+
 ## Install Django 4.2.4
 ```pip install django==4.2.4```
 
@@ -16,7 +19,11 @@
 ## Add drf-yasg
 ```pip install drf-yasg```
 
-## Cambiar el modelo GMAIL
+## Renderizar archivos estaticos
+```python manage.py collectstatic```
+
+
+## Cambiar el modelo User
 * 1. Eliminar las migraciones del proyecto
 * 2. Eliminar base de datos 
 * 3. Crear el modelo User por defecto
