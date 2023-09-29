@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from posts.models import Post
 from posts.API.serializer import PostSerializer
 from rest_framework.viewsets import ViewSet, ModelViewSet
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
+from posts.API.permisions import IsAdminOrReadyOnly
 
 
 # GET - POST 'Simple'
@@ -64,7 +66,11 @@ from rest_framework.viewsets import ViewSet, ModelViewSet
 #             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
+# En Django Rest Framework (DRF), ModelViewSet es una clase de vista genérica que se utiliza comúnmente
+# para crear vistas basadas en modelos en una API web
 class PostModelViewSet(ModelViewSet):
+    # permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminOrReadyOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
