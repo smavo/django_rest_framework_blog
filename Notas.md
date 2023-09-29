@@ -15,3 +15,12 @@
 
 ## Add drf-yasg
 ```pip install drf-yasg```
+
+## Cambiar el modelo GMAIL
+* 1. Eliminar las migraciones del proyecto
+* 2. Eliminar base de datos 
+* 3. Crear el modelo User por defecto
+* 4. Volver a correr las migraciones
+
+## Crear usuario
+```python manage.py createsuperuser```
