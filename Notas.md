@@ -12,3 +12,6 @@
 
 ## Add Django Rest Framework
 ```pip install djangorestframework```
+
+## Add drf-yasg
+```pip install drf-yasg```
