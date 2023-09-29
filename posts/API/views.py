@@ -3,8 +3,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from posts.models import Post
 from posts.API.serializer import PostSerializer
-from rest_framework.viewsets import ViewSet
+from rest_framework.viewsets import ViewSet, ModelViewSet
 
+
+# GET - POST 'Simple'
 # class PostApiView(APIView):
 #     def get(self, request):
 #         # posts = Post.objects.all()
@@ -30,6 +32,7 @@ from rest_framework.viewsets import ViewSet
 #         return Response(status=status.HTTP_200_OK, data=serializer.data)
 
 
+# Clases con ViewSet
 class PostViewSet(ViewSet):
     def list(self, request):
         serializer = PostSerializer(Post.objects.all(), many=True)
@@ -44,3 +47,19 @@ class PostViewSet(ViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(status=status.HTTP_200_OK, data=serializer.data)
+
+    def update(self, request, pk: int):
+        post = Post.objects.get(pk=pk)
+        serializer = PostSerializer(post, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(status=status.HTTP_200_OK, data=serializer.data)
+
+    def destroy(self, request, pk: int):
+        try:
+            post = Post.objects.get(pk=pk)
+            post.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Post.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
