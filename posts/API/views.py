@@ -33,33 +33,38 @@ from rest_framework.viewsets import ViewSet, ModelViewSet
 
 
 # Clases con ViewSet
-class PostViewSet(ViewSet):
-    def list(self, request):
-        serializer = PostSerializer(Post.objects.all(), many=True)
-        return Response(status=status.HTTP_200_OK, data=serializer.data)
+# class PostViewSet(ViewSet):
+#     def list(self, request):
+#         serializer = PostSerializer(Post.objects.all(), many=True)
+#         return Response(status=status.HTTP_200_OK, data=serializer.data)
+#
+#     def retrieve(self, request, pk: int):
+#         post = PostSerializer(Post.objects.get(pk=pk))
+#         return Response(status=status.HTTP_200_OK, data=post.data)
+#
+#     def create(self, request):
+#         serializer = PostSerializer(data=request.POST)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(status=status.HTTP_200_OK, data=serializer.data)
+#
+#     def update(self, request, pk: int):
+#         post = Post.objects.get(pk=pk)
+#         serializer = PostSerializer(post, data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(status=status.HTTP_200_OK, data=serializer.data)
+#
+#     def destroy(self, request, pk: int):
+#         try:
+#             post = Post.objects.get(pk=pk)
+#             post.delete()
+#             return Response(status=status.HTTP_204_NO_CONTENT)
+#         except Post.DoesNotExist:
+#             return Response(status=status.HTTP_404_NOT_FOUND)
 
-    def retrieve(self, request, pk: int):
-        post = PostSerializer(Post.objects.get(pk=pk))
-        return Response(status=status.HTTP_200_OK, data=post.data)
 
-    def create(self, request):
-        serializer = PostSerializer(data=request.POST)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(status=status.HTTP_200_OK, data=serializer.data)
-
-    def update(self, request, pk: int):
-        post = Post.objects.get(pk=pk)
-        serializer = PostSerializer(post, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(status=status.HTTP_200_OK, data=serializer.data)
-
-    def destroy(self, request, pk: int):
-        try:
-            post = Post.objects.get(pk=pk)
-            post.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except Post.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+class PostModelViewSet(ModelViewSet):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
 
